@@ -8,7 +8,7 @@ function App() {
       <h1 className="text-6xl font-bold text-green-500 text-center">
         Coffee {coffees.length}
       </h1>
-      <div className="grid grid-cols-3 gap-6">
+      <div className="grid grid-cols-2 gap-6">
         {coffees.map((coffee) => (
           <Coffee key={coffee._id} coffee={coffee}></Coffee>
         ))}
