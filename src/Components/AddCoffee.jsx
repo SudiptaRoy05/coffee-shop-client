@@ -1,5 +1,5 @@
 export default function AddCoffee() {
-  const handleForm = (e) => {
+  const handleAddCoffee = (e) => {
     e.preventDefault();
     const form = new FormData(e.target);
 
@@ -11,7 +11,19 @@ export default function AddCoffee() {
     const photoURL = form.get("photoURL");
 
     const coffee = { name, available, quantity, details, category, photoURL };
-    console.log(coffee);
+    // console.log(coffee);
+
+    fetch("http://localhost:3000/coffee",{
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body:JSON.stringify(coffee),
+    })
+    .then(res => res.json())
+    .then(data =>{
+      console.log(data);
+    })
   };
 
   return (
@@ -20,7 +32,10 @@ export default function AddCoffee() {
         Add a Coffee
       </h1>
       <div className="card w-full shrink-0 shadow-2xl bg-blue-950">
-        <form onSubmit={handleForm} className="card-body grid grid-cols-2">
+        <form
+          onSubmit={handleAddCoffee}
+          className="card-body grid grid-cols-2 text-orange-500"
+        >
           <div className="form-control">
             <label className="label">
               <span className="label-text">Name</span>
@@ -94,7 +109,12 @@ export default function AddCoffee() {
             />
           </div>
           <div className="form-control mt-6 col-span-2">
-            <button className="btn btn-primary">Login</button>
+            {/* <button className="btn btn-primary">Login</button> */}
+            <input
+              type="submit"
+              value="Add Coffee"
+              className="btn btn-success"
+            />
           </div>
         </form>
       </div>
